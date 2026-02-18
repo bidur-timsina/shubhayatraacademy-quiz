@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Fundamentals Quiz | Shubha Yatra Academy</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #e74c3c;
+            --light-bg: #f4f6f7;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: var(--white);
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        /* Branding Header */
+        header {
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 1rem;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .sub-title {
+            color: var(--accent-color);
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Start Screen */
+        .btn {
+            background-color: var(--accent-color);
+            color: var(--white);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 2rem;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* Quiz Screen */
+        .timer-container {
+            margin-bottom: 20px;
+        }
+
+        .timer-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--warning-color);
+            margin-bottom: 5px;
+        }
+
+        .timer-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .timer-fill {
+            height: 100%;
+            background-color: var(--success-color);
+            width: 100%;
+            transition: width 1s linear;
+        }
+
+        .question-meta {
+            text-align: right; 
+            color: #7f8c8d; 
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        @media (max-width: 600px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .option-btn {
+            background-color: var(--light-bg);
+            border: 2px solid #e0e0e0;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            display: flex; /* Aligns A/B/C/D with text */
+            align-items: center;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent-color);
+            background-color: #ebf5fb;
+        }
+
+        .option-label {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-right: 15px;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .option-btn.correct {
+            background-color: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+        
+        .option-btn.correct .option-label {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .option-btn.wrong {
+            background-color: var(--warning-color);
+            color: white;
+            border-color: var(--warning-color);
+        }
+
+        .option-btn.wrong .option-label {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        /* Result Screen */
+        .score-display {
+            font-size: 4rem;
+            color: var(--primary-color);
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .result-message {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 2rem;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Shubha Yatra Academy</h1>
+        <div class="sub-title">Computer Fundamentals Quiz</div>
+    </header>
+
+    <div id="start-screen" class="screen active">
+        <h2>Ready to test your knowledge?</h2>
+        <p>You have <strong>20 seconds</strong> per question.</p>
+        <p>Total Questions: 20</p>
+        <button class="btn" onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <div id="quiz-screen" class="screen">
+        <div class="timer-container">
+            <div class="timer-text" id="timer-text">20</div>
+            <div class="timer-bar">
+                <div class="timer-fill" id="timer-fill"></div>
+            </div>
+        </div>
+        
+        <div class="question-meta">
+            Question <span id="current-q-num">1</span>/20
+        </div>
+        
+        <div class="question-text" id="question-text">
+            Loading Question...
+        </div>
+        
+        <div class="options-grid" id="options-container">
+            </div>
+    </div>
+
+    <div id="result-screen" class="screen">
+        <h2>Quiz Completed!</h2>
+        <div class="score-display">
+            <span id="final-score">0</span> / 20
+        </div>
+        <p class="result-message" id="result-message">Great effort!</p>
+        <button class="btn" onclick="location.reload()">Retake Quiz</button>
+    </div>
+</div>
+
+<script>
+    const questions = [
+        {
+            q: "Which component is considered the 'brain' of the computer, responsible for executing instructions?",
+            options: ["Hard Drive", "CPU (Central Processing Unit)", "RAM (Random Access Memory)", "Power Supply Unit"],
+            answer: 1
+        },
+        {
+            q: "What was the primary electronic component used in First Generation computers (1940–1956)?",
+            options: ["Transistors", "Vacuum Tubes", "Integrated Circuits", "Microprocessors"],
+            answer: 1
+        },
+        {
+            q: "Who invented the 'Tabulating Machine' which used punched cards to process the US Census?",
+            options: ["Charles Babbage", "Herman Hollerith", "Blaise Pascal", "Alan Turing"],
+            answer: 1
+        },
+        {
+            q: "Which characteristic of a computer ensures that if the input is correct, the result will always be correct?",
+            options: ["Speed", "Accuracy", "Versatility", "Diligence"],
+            answer: 1
+        },
+        {
+            q: "What technology replaced vacuum tubes in the Second Generation of computers?",
+            options: ["Transistors", "Microprocessors", "Gears and Levers", "Integrated Circuits"],
+            answer: 0
+        },
+        {
+            q: "Which type of computer is used to measure continuous physical quantities like temperature or speed?",
+            options: ["Digital Computer", "Analog Computer", "Mainframe Computer", "Supercomputer"],
+            answer: 1
+        },
+        {
+            q: "Who designed the 'Analytical Engine', considered the first general-purpose programmable computer design?",
+            options: ["John von Neumann", "Charles Babbage", "Ada Lovelace", "Blaise Pascal"],
+            answer: 1
+        },
+        {
+            q: "Which generation of computers introduced the 'Microprocessor', putting the CPU on a single chip?",
+            options: ["Third Generation", "Fourth Generation", "Second Generation", "First Generation"],
+            answer: 1
+        },
+        {
+            q: "A computer used in a hospital ICU that measures heartbeat (analog) and displays it as numbers (digital) is an example of what?",
+            options: ["Hybrid Computer", "Supercomputer", "Mainframe Computer", "Tablet Computer"],
+            answer: 0
+        },
+        {
+            q: "Which of the following is NOT a characteristic of a computer?",
+            options: ["Automation", "Creativity", "Storage", "Speed"],
+            answer: 1
+        },
+        {
+            q: "Which device, dating back to ancient Mesopotamia, is considered the earliest mechanical tool for calculation?",
+            options: ["Slide Rule", "Abacus", "Pascaline", "Napier's Bones"],
+            answer: 1
+        },
+        {
+            q: "What does 'IC' stand for in the context of Third Generation computers?",
+            options: ["Internal Calculator", "Integrated Circuit", "Intelligent Chip", "Information Center"],
+            answer: 1
+        },
+        {
+            q: "Which type of computer is designed for large organizations to handle high volumes of data processing?",
+            options: ["Microcomputer", "Mainframe Computer", "Workstation", "Embedded System"],
+            answer: 1
+        },
+        {
+            q: "Which era of computing was defined by the use of simple gears, wheels, and physical motion before electricity?",
+            options: ["The Mechanical Era", "The Transistor Era", "The Quantum Era", "The Digital Era"],
+            answer: 0
+        },
+        {
+            q: "In the acronym IPOS, what does the 'S' stand for?",
+            options: ["System", "Storage", "Scan", "Speed"],
+            answer: 1
+        },
+        {
+            q: "The 'Pascaline', invented in 1642, was capable of performing which operations?",
+            options: ["Multiplication and Division", "Addition and Subtraction", "Square Roots", "Calculus"],
+            answer: 1
+        },
+        {
+            q: "Which of the following is an example of a 'Microcomputer'?",
+            options: ["The Summit Supercomputer", "A Laptop", "An IBM Mainframe", "The ENIAC"],
+            answer: 1
+        },
+        {
+            q: "Fifth Generation computers (Present-Future) are primarily focused on developing which technology?",
+            options: ["Vacuum Tubes", "Artificial Intelligence (AI)", "Punch Cards", "Mechanical Gears"],
+            answer: 1
+        },
+        {
+            q: "What is the meaning of 'Versatility' in computers?",
+            options: ["Ability to store data forever", "Ability to perform different types of tasks", "Ability to repair itself", "Ability to process data at high speed"],
+            answer: 1
+        },
+        {
+            q: "Which computer was the first to be commercially available for business use?",
+            options: ["ENIAC", "UNIVAC", "Colossus", "Difference Engine"],
+            answer: 1
+        }
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let timerInterval;
+    const timeLimit = 30;
+    const labels = ["A", "B", "C", "D"]; // Labels array
+
+    const startScreen = document.getElementById('start-screen');
+    const quizScreen = document.getElementById('quiz-screen');
+    const resultScreen = document.getElementById('result-screen');
+    const questionText = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const timerFill = document.getElementById('timer-fill');
+    const timerText = document.getElementById('timer-text');
+    const currentQNum = document.getElementById('current-q-num');
+    const finalScore = document.getElementById('final-score');
+    const resultMessage = document.getElementById('result-message');
+
+    function startQuiz() {
+        startScreen.classList.remove('active');
+        quizScreen.classList.add('active');
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        clearInterval(timerInterval);
+        
+        let timeLeft = timeLimit;
+        timerText.innerText = timeLeft;
+        timerFill.style.width = '100%';
+        timerFill.style.backgroundColor = '#27ae60';
+        timerText.style.color = '#2c3e50';
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerText.innerText = timeLeft;
+            let percentage = (timeLeft / timeLimit) * 100;
+            timerFill.style.width = percentage + '%';
+
+            if(timeLeft < 6) {
+                timerFill.style.backgroundColor = '#e74c3c';
+                timerText.style.color = '#e74c3c';
+            }
+
+            if(timeLeft <= 0) {
+                clearInterval(timerInterval);
+                selectOption(-1);
+            }
+        }, 1000);
+
+        const currentQ = questions[currentQuestionIndex];
+        currentQNum.innerText = currentQuestionIndex + 1;
+        questionText.innerText = currentQ.q;
+        optionsContainer.innerHTML = '';
+
+        currentQ.options.forEach((opt, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            
+            // Insert label (A, B, C, D)
+            btn.innerHTML = `<span class="option-label">${labels[index]}</span> ${opt}`;
+            
+            btn.onclick = () => selectOption(index);
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectOption(selectedIndex) {
+        clearInterval(timerInterval);
+        const currentQ = questions[currentQuestionIndex];
+        const buttons = optionsContainer.getElementsByClassName('option-btn');
+        let correctIndex = currentQ.answer;
+
+        if(selectedIndex === correctIndex) {
+            score++;
+            buttons[selectedIndex].classList.add('correct');
+        } else {
+            if(selectedIndex !== -1) {
+                buttons[selectedIndex].classList.add('wrong');
+            }
+            buttons[correctIndex].classList.add('correct');
+        }
+
+        for(let btn of buttons) {
+            btn.disabled = true;
+            btn.style.cursor = 'default';
+        }
+
+        setTimeout(() => {
+            currentQuestionIndex++;
+            if(currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }, 1500);
+    }
+
+    function showResults() {
+        quizScreen.classList.remove('active');
+        resultScreen.classList.add('active');
+        finalScore.innerText = score;
+
+        if(score >= 18) {
+            resultMessage.innerText = "Outstanding! You are a computer genius!";
+        } else if(score >= 14) {
+            resultMessage.innerText = "Great job! You know your fundamentals well.";
+        } else if(score >= 10) {
+            resultMessage.innerText = "Good effort, but review the material again.";
+        } else {
+            resultMessage.innerText = "Keep studying! You'll get it next time.";
+        }
+    }
+</script>
+
+</body>
+</html>
