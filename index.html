@@ -4,1112 +4,442 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Shubha Yatra Academy</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet"/>
-
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --bg: #0b0f19;
-  --surface: #111827;
-  --surface2: #1a2235;
-  --border: rgba(255,255,255,.07);
-  --border2: rgba(255,255,255,.12);
-  --text: #e8edf5;
-  --muted: #6b7a99;
-  --accent: #4f8ef7;
-  --accent2: #7b5ea7;
-  --green: #22c97a;
-  --red: #f75555;
-  --gold: #f5c842;
-  --r: 18px;
+  --sky: #e8f4fd;
+  --sky2: #d0e9f8;
+  --white: #ffffff;
+  --navy: #1a3557;
+  --navy2: #0f2240;
+  --blue: #2176ae;
+  --blue-light: #4a9fd4;
+  --green: #2a9d5c;
+  --green-light: #d4f0e3;
+  --red: #d64045;
+  --red-light: #fdeaea;
+  --amber: #e07b00;
+  --amber-light: #fff3dc;
+  --yellow: #ffd166;
+  --text: #1a2e45;
+  --muted: #5a7184;
+  --border: #c8dcea;
+  --border2: #ddeaf5;
+  --shadow: 0 2px 8px rgba(26,53,87,.10);
+  --shadow-md: 0 4px 16px rgba(26,53,87,.12);
+  --shadow-lg: 0 8px 32px rgba(26,53,87,.15);
 }
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
-  overflow-x: hidden;
-}
-
-/* Ambient bg blobs */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(ellipse 800px 500px at 10% 20%, rgba(79,142,247,.10) 0%, transparent 60%),
-    radial-gradient(ellipse 600px 400px at 90% 80%, rgba(123,94,167,.10) 0%, transparent 60%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ─── HEADER ─── */
-header {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(11,15,25,.82);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
-}
-.hdr {
-  max-width: 1100px; margin: 0 auto;
-  padding: 14px 20px;
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-}
-.brand {
-  display: flex; align-items: center; gap: 11px;
-  font-family: 'Syne', sans-serif;
-  font-weight: 800; font-size: 1.15rem;
-  color: var(--text);
-  cursor: pointer; user-select: none;
-  letter-spacing: -.3px;
-}
-.brand-mark {
-  width: 36px; height: 36px; border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  display: grid; place-items: center;
-  font-size: .85rem; font-weight: 800; color: #fff;
-  flex-shrink: 0;
-  box-shadow: 0 0 20px rgba(79,142,247,.35);
-}
-.brand em { color: var(--accent); font-style: normal; }
-@media (max-width: 380px) { .brand-text { display: none; } }
-
-.hdr-right { display: flex; align-items: center; gap: 10px; }
-.chip {
-  padding: 6px 12px; border-radius: 999px;
-  border: 1px solid var(--border2);
-  background: var(--surface);
-  color: var(--muted); font-size: .83rem;
-  display: flex; align-items: center; gap: 6px;
-  font-family: 'DM Sans', sans-serif;
-}
-.chip b { color: var(--text); }
-
-/* ─── BREADCRUMB ─── */
-.bc-wrap {
-  background: rgba(17,24,39,.6);
-  border-bottom: 1px solid var(--border);
-}
-.bc {
-  max-width: 1100px; margin: 0 auto;
-  padding: 10px 20px;
-  display: flex; align-items: center; gap: 7px;
-  font-size: .83rem; color: var(--muted);
-  flex-wrap: wrap;
-}
-.bc-item {
-  color: var(--accent); font-weight: 600;
-  cursor: pointer; user-select: none;
-  transition: opacity .15s;
-}
-.bc-item:hover { opacity: .75; }
-.bc-sep { opacity: .35; font-size: .9rem; }
-.bc-current { color: var(--text); font-weight: 500; }
-
-/* ─── MAIN ─── */
-main {
-  max-width: 1100px; margin: 0 auto;
-  padding: 28px 20px 60px;
-  position: relative; z-index: 1;
-}
-
-/* ─── PAGE HERO ─── */
-.page-hero { margin-bottom: 24px; }
-.page-hero h1 {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.7rem; font-weight: 800;
-  color: var(--text); letter-spacing: -.5px;
-  line-height: 1.2;
-}
-.page-hero p { color: var(--muted); margin-top: 6px; font-size: .95rem; }
-
-/* ─── SECTION SHELL ─── */
-.section-shell {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 20px;
-}
-.section-label {
-  font-family: 'Syne', sans-serif;
-  font-size: .75rem; font-weight: 700;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; gap: 8px;
-}
-.section-label::before {
-  content: '';
-  display: inline-block; width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 8px var(--accent);
-}
-
-/* ─── CARDS GRID ─── */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 14px;
-}
-
-.card {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: 18px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
-}
-.card::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 200px 120px at 0% 0%, rgba(79,142,247,.10), transparent 55%);
-  pointer-events: none;
-  transition: opacity .2s;
-}
-.card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(79,142,247,.35);
-  box-shadow: 0 16px 40px rgba(0,0,0,.35);
-}
-.card:hover::after { opacity: 2; }
-
-.card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
-.card-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: linear-gradient(135deg, rgba(79,142,247,.2), rgba(79,142,247,.06));
-  border: 1px solid rgba(79,142,247,.2);
-  display: grid; place-items: center;
-  font-size: 20px; flex-shrink: 0;
-}
-.card-tag {
-  background: rgba(79,142,247,.12);
-  border: 1px solid rgba(79,142,247,.2);
-  color: var(--accent);
-  font-size: .75rem; font-weight: 600;
-  padding: 4px 9px; border-radius: 999px;
-  white-space: nowrap;
-}
-.card h3 {
-  font-family: 'Syne', sans-serif;
-  font-size: 1rem; font-weight: 700;
-  color: var(--text); margin-bottom: 5px;
-  line-height: 1.3;
-}
-.card p { color: var(--muted); font-size: .855rem; line-height: 1.5; }
-.card-footer {
-  margin-top: 14px;
-  display: flex; align-items: center; justify-content: space-between;
-  color: var(--accent); font-size: .83rem; font-weight: 600;
-}
-.arrow-btn {
-  width: 30px; height: 30px; border-radius: 8px;
-  background: rgba(79,142,247,.14);
-  border: 1px solid rgba(79,142,247,.25);
-  display: grid; place-items: center;
-  font-size: .9rem;
-  transition: background .15s;
-}
-.card:hover .arrow-btn { background: rgba(79,142,247,.28); }
-
-/* ─── QUIZ LAYOUT ─── */
-.quiz-wrap { max-width: 740px; margin: 0 auto; }
-
-.quiz-shell {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  overflow: hidden;
-}
-
-/* Quiz Header */
-.quiz-hdr {
-  padding: 18px 22px;
-  border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  background: var(--surface2);
-}
-.quiz-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 1rem; font-weight: 700; color: var(--text);
-}
-.timer-chip {
-  display: flex; align-items: center; gap: 7px;
-  padding: 7px 12px; border-radius: 999px;
-  background: rgba(247,85,85,.1);
-  border: 1px solid rgba(247,85,85,.2);
-  color: var(--red);
-  font-weight: 700; font-size: .9rem;
-  user-select: none; transition: background .3s;
-}
-.timer-chip.warn { background: rgba(247,85,85,.2); }
-
-/* Progress */
-.progress-row {
-  padding: 12px 22px;
-  border-bottom: 1px solid var(--border);
-  background: rgba(0,0,0,.15);
-}
-.progress-info {
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: .82rem; color: var(--muted); margin-bottom: 8px;
-}
-.progress-info span b { color: var(--text); }
-.score-badge {
-  display: flex; align-items: center; gap: 5px;
-  color: var(--green); font-weight: 700;
-  font-size: .85rem;
-}
-.progress-bar {
-  width: 100%; height: 6px;
-  background: rgba(255,255,255,.06);
-  border-radius: 999px; overflow: hidden;
-}
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--accent), var(--accent2));
-  border-radius: 999px;
-  transition: width .35s ease;
-  box-shadow: 0 0 8px var(--accent);
-}
-
-/* Timer bar */
-.timer-bar {
-  width: 100%; height: 3px;
-  background: rgba(255,255,255,.04);
-  overflow: hidden;
-}
-.timer-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--green), var(--accent));
-  width: 100%;
-  transition: width 1s linear;
-  transform-origin: left;
-}
-.timer-fill.low { background: linear-gradient(90deg, var(--red), #ff8c00); }
-
-/* Q Body */
-.q-body { padding: 24px 22px; }
-.q-num {
-  font-size: .75rem; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--muted);
-  margin-bottom: 10px;
-  display: flex; align-items: center; gap: 6px;
-}
-.q-num::before {
-  content: ''; display: inline-block;
-  width: 5px; height: 5px; border-radius: 50%;
-  background: var(--accent);
-}
-.q-text {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.2rem; font-weight: 700;
-  color: var(--text); line-height: 1.4;
-  margin-bottom: 20px;
-}
-
-/* Options */
-.options { display: flex; flex-direction: column; gap: 9px; }
-.opt {
-  background: rgba(255,255,255,.04);
-  border: 1px solid var(--border2);
-  border-radius: 13px;
-  padding: 13px 14px;
-  display: flex; align-items: center; gap: 12px;
-  cursor: pointer;
-  transition: background .15s, border-color .15s, transform .12s;
-  text-align: left;
-  color: var(--text);
-  font-size: .93rem; font-weight: 500;
-}
-.opt:not(:disabled):hover {
-  background: rgba(79,142,247,.09);
-  border-color: rgba(79,142,247,.3);
-  transform: translateX(3px);
-}
-.opt:disabled { cursor: default; transform: none !important; }
-.opt-key {
-  width: 28px; height: 28px; border-radius: 8px;
-  background: rgba(255,255,255,.07);
-  border: 1px solid var(--border2);
-  display: grid; place-items: center;
-  font-size: .78rem; font-weight: 800; color: var(--muted);
-  flex-shrink: 0; font-family: 'Syne', sans-serif;
-  transition: background .15s, color .15s;
-}
-.opt.correct {
-  background: rgba(34,201,122,.09);
-  border-color: rgba(34,201,122,.35);
-}
-.opt.correct .opt-key {
-  background: rgba(34,201,122,.2);
-  border-color: rgba(34,201,122,.4);
-  color: var(--green);
-}
-.opt.wrong {
-  background: rgba(247,85,85,.08);
-  border-color: rgba(247,85,85,.3);
-}
-.opt.wrong .opt-key {
-  background: rgba(247,85,85,.18);
-  border-color: rgba(247,85,85,.35);
-  color: var(--red);
-}
-
-/* Quiz footer */
-.quiz-footer {
-  padding: 16px 22px;
-  border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  background: var(--surface2);
-}
-.btn {
-  padding: 10px 18px; border-radius: 999px;
-  border: none; cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-size: .88rem; font-weight: 600;
-  display: inline-flex; align-items: center; gap: 7px;
-  transition: all .15s;
-}
-.btn.ghost {
-  background: rgba(255,255,255,.06);
-  border: 1px solid var(--border2);
-  color: var(--muted);
-}
-.btn.ghost:hover { background: rgba(255,255,255,.1); color: var(--text); }
-.btn.primary {
-  background: linear-gradient(135deg, var(--accent), #3a7de8);
-  color: #fff;
-  box-shadow: 0 6px 20px rgba(79,142,247,.35);
-}
-.btn.primary:hover { box-shadow: 0 8px 26px rgba(79,142,247,.5); transform: translateY(-1px); }
-.btn.primary:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
-
-/* ─── RESULT ─── */
-.result-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 40px 24px;
-  text-align: center;
-  max-width: 500px; margin: 0 auto;
-  position: relative; overflow: hidden;
-}
-.result-card::before {
-  content: '';
-  position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
-  width: 300px; height: 300px; border-radius: 50%;
-  background: radial-gradient(circle, rgba(79,142,247,.12), transparent 70%);
-  pointer-events: none;
-}
-.result-emoji { font-size: 3.5rem; margin-bottom: 12px; }
-.result-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 1.5rem; font-weight: 800;
-  color: var(--text); margin-bottom: 8px;
-}
-.result-score {
-  font-family: 'Syne', sans-serif;
-  font-size: 3.8rem; font-weight: 800;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  margin: 8px 0;
-}
-.result-sub { color: var(--muted); font-size: .9rem; margin-bottom: 6px; }
-.result-msg {
-  margin: 16px 0 24px;
-  color: var(--text); font-size: 1rem; font-weight: 500;
-}
-.result-stats {
-  display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 24px;
-}
-.stat-chip {
-  padding: 8px 14px; border-radius: 999px;
-  border: 1px solid var(--border2);
-  background: var(--surface2);
-  font-size: .83rem; color: var(--muted);
-  display: flex; align-items: center; gap: 5px;
-}
-.stat-chip b { color: var(--text); }
-.stat-chip.g b { color: var(--green); }
-.stat-chip.r b { color: var(--red); }
-
-/* ─── UTILITIES ─── */
-.hidden { display: none !important; }
-.spin { animation: spin .7s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-
-/* Fade in */
-.fade-in { animation: fadeUp .35s ease forwards; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ─── MOBILE-FIRST RESPONSIVE ─── */
-
-/* Tap highlight removal for mobile */
-* { -webkit-tap-highlight-color: transparent; }
-
-/* Active states for touch (more responsive than hover on mobile) */
-@media (hover: none) {
-  .opt:not(:disabled):active {
-    background: rgba(79,142,247,.14);
-    border-color: rgba(79,142,247,.4);
-    transform: scale(.98);
-  }
-  .card:active {
-    transform: scale(.98);
-    border-color: rgba(79,142,247,.35);
-  }
-  .btn:active { opacity: .82; transform: scale(.97); }
-}
-
-/* ── ≤768px tablets / large phones ── */
-@media (max-width: 768px) {
-  main { padding: 16px 14px 32px; }
-
-  .page-hero h1 { font-size: 1.4rem; }
-  .page-hero { margin-bottom: 16px; }
-
-  .section-shell { padding: 16px; border-radius: 20px; }
-  .grid { grid-template-columns: 1fr; gap: 12px; }
-
-  .quiz-wrap { max-width: 100%; }
-  .quiz-shell { border-radius: 20px; }
-
-  .q-body { padding: 20px 16px; }
-  .quiz-hdr { padding: 14px 16px; }
-  .progress-row { padding: 10px 16px; }
-  .quiz-footer { padding: 12px 16px; }
-
-  .q-text { font-size: 1.1rem; }
-  .result-score { font-size: 3.2rem; }
-}
-
-/* ── ≤480px small phones ── */
-@media (max-width: 480px) {
-  /* Header compact */
-  .hdr { padding: 10px 14px; }
-  .brand { font-size: 1rem; gap: 8px; }
-  .brand-mark { width: 32px; height: 32px; border-radius: 9px; font-size: .78rem; }
-
-  /* Breadcrumb tighter */
-  .bc { padding: 8px 14px; font-size: .78rem; gap: 5px; }
-
-  /* Main tighter */
-  main { padding: 14px 12px 120px; } /* extra bottom padding for sticky footer */
-  .page-hero h1 { font-size: 1.25rem; letter-spacing: -.3px; }
-  .page-hero p { font-size: .875rem; }
-  .page-hero { margin-bottom: 14px; }
-
-  /* Section */
-  .section-shell { padding: 14px 12px; border-radius: 18px; }
-  .section-label { font-size: .7rem; margin-bottom: 12px; padding-bottom: 10px; }
-
-  /* Cards full width with comfortable touch targets */
-  .grid { gap: 10px; }
-  .card { padding: 16px 14px; border-radius: 16px; }
-  .card h3 { font-size: .97rem; }
-  .card p { font-size: .83rem; }
-  .card-icon { width: 40px; height: 40px; font-size: 18px; border-radius: 11px; }
-  .card-footer { margin-top: 12px; font-size: .82rem; }
-  .arrow-btn { width: 28px; height: 28px; border-radius: 7px; }
-
-  /* Quiz shell - full bleed on mobile */
-  .quiz-shell { border-radius: 18px; }
-  .quiz-hdr { padding: 13px 14px; }
-  .quiz-title { font-size: .92rem; }
-  .timer-chip { padding: 6px 10px; font-size: .82rem; gap: 5px; }
-
-  .progress-row { padding: 9px 14px; }
-  .progress-info { font-size: .78rem; }
-
-  .q-body { padding: 18px 14px 14px; }
-  .q-num { font-size: .7rem; margin-bottom: 8px; }
-  .q-text { font-size: 1.05rem; margin-bottom: 16px; line-height: 1.45; }
-
-  /* Options — big comfortable tap targets */
-  .options { gap: 8px; }
-  .opt {
-    padding: 14px 12px;
-    border-radius: 12px;
-    font-size: .9rem;
-    gap: 10px;
-    min-height: 52px; /* comfortable thumb target */
-  }
-  .opt-key { width: 30px; height: 30px; border-radius: 8px; font-size: .76rem; }
-
-  /* Quiz footer — sticky on mobile ONLY during quiz */
-  .quiz-footer.quiz-active {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    border-radius: 0;
-    border-top: 1px solid var(--border);
-    padding: 12px 14px;
-    padding-bottom: max(12px, env(safe-area-inset-bottom));
-    background: rgba(17,24,39,.96);
-    backdrop-filter: blur(18px);
-    z-index: 50;
-  }
-  .btn { padding: 12px 16px; font-size: .88rem; border-radius: 14px; }
-  .btn.primary { flex: 1; justify-content: center; font-size: .9rem; }
-  .btn.ghost { flex-shrink: 0; }
-
-  /* Result */
-  .result-card { padding: 32px 18px; border-radius: 20px; }
-  .result-emoji { font-size: 3rem; }
-  .result-title { font-size: 1.3rem; }
-  .result-score { font-size: 2.8rem; }
-  .result-stats { gap: 8px; }
-  .stat-chip { padding: 7px 11px; font-size: .8rem; }
-  #homeBtn { padding: 14px; font-size: .9rem; border-radius: 14px; }
-}
-
-/* ── Safe-area support for notched/dynamic-island phones ── */
-@supports (padding-bottom: env(safe-area-inset-bottom)) {
-  header {
-    padding-top: env(safe-area-inset-top);
-  }
-}
-
-/* ── Landscape phones ── */
-@media (max-height: 500px) and (orientation: landscape) {
-  .quiz-footer, .quiz-footer.quiz-active { position: relative; }
-  main { padding-bottom: 20px; }
-  .q-body { padding: 14px 16px; }
-  .q-text { font-size: 1rem; margin-bottom: 12px; }
-  .options { gap: 6px; }
-  .opt { padding: 10px 12px; min-height: 44px; }
-  .page-hero { margin-bottom: 10px; }
-  .page-hero h1 { font-size: 1.1rem; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:#edf5fc;color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(33,118,174,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(33,118,174,.04) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+header{position:sticky;top:0;z-index:100;background:var(--navy);box-shadow:0 3px 12px rgba(10,30,60,.25)}
+.hdr{max-width:1100px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.brand-mark{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--blue-light),var(--blue));display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 8px rgba(33,118,174,.4);flex-shrink:0}
+.brand-name{font-size:.95rem;font-weight:800;color:#fff;letter-spacing:-.2px;line-height:1.2}
+.brand-tagline{font-size:.7rem;color:var(--blue-light);font-weight:600;letter-spacing:.05em}
+.hdr-pill{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:5px 12px;font-size:.75rem;font-weight:700;color:var(--yellow);letter-spacing:.04em}
+.bc-wrap{background:var(--navy2);border-bottom:2px solid var(--blue)}
+.bc{max-width:1100px;margin:0 auto;padding:8px 24px;display:flex;align-items:center;gap:6px;font-size:.78rem;color:rgba(255,255,255,.5)}
+.bc-item{color:var(--blue-light);font-weight:700;cursor:pointer;transition:color .15s}
+.bc-item:hover{color:#fff}
+.bc-sep{opacity:.4}
+.bc-current{color:rgba(255,255,255,.85);font-weight:600}
+main{max-width:1100px;margin:0 auto;padding:32px 24px 80px;position:relative;z-index:1}
+.page-hero{background:var(--navy);border-radius:16px;padding:28px 32px;margin-bottom:28px;display:flex;align-items:center;gap:20px;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(33,118,174,.3),transparent 70%)}
+.page-hero::after{content:'';position:absolute;right:60px;bottom:-60px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(255,209,102,.12),transparent 70%)}
+.hero-icon{width:56px;height:56px;border-radius:14px;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.15);display:grid;place-items:center;font-size:26px;flex-shrink:0}
+.page-hero h1{font-size:1.5rem;font-weight:900;color:#fff;letter-spacing:-.3px;line-height:1.2}
+.page-hero p{color:rgba(255,255,255,.6);margin-top:4px;font-size:.88rem}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.section-head h2{font-size:.8rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--blue)}
+.section-line{flex:1;height:2px;background:linear-gradient(90deg,var(--border),transparent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:16px}
+.card{background:var(--white);border:2px solid var(--border2);border-radius:14px;padding:24px;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue),var(--blue-light));border-radius:14px 14px 0 0}
+.card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--blue-light)}
+.card-subject{display:inline-flex;align-items:center;gap:6px;background:var(--sky);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:.7rem;font-weight:800;color:var(--blue);letter-spacing:.06em;text-transform:uppercase;margin-bottom:14px}
+.card-icon-wrap{width:52px;height:52px;border-radius:12px;background:var(--sky);display:grid;place-items:center;font-size:24px;margin-bottom:12px;border:2px solid var(--border2)}
+.card h3{font-size:1.1rem;font-weight:800;color:var(--navy);margin-bottom:8px;line-height:1.3}
+.card p{color:var(--muted);font-size:.84rem;line-height:1.6}
+.card-footer{margin-top:18px;display:flex;align-items:center;justify-content:space-between}
+.card-cta{font-size:.82rem;font-weight:800;color:var(--blue);display:flex;align-items:center;gap:6px;background:var(--sky);padding:6px 12px;border-radius:20px;border:1.5px solid var(--border);transition:background .15s}
+.card:hover .card-cta{background:var(--blue);color:#fff;border-color:var(--blue)}
+.card-num{font-size:.75rem;color:var(--muted);font-weight:700}
+.quiz-wrap{max-width:720px;margin:0 auto}
+.quiz-shell{background:var(--white);border:2px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.quiz-hdr{background:var(--navy);padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.quiz-title{font-size:.95rem;font-weight:800;color:#fff;letter-spacing:-.2px;display:flex;align-items:center;gap:8px}
+.quiz-title-icon{font-size:18px}
+.q-counter{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);border-radius:20px;padding:4px 12px;font-size:.8rem;font-weight:800;color:var(--yellow)}
+.progress-area{background:var(--sky);border-bottom:2px solid var(--border2);padding:12px 24px;display:flex;align-items:center;gap:14px}
+.progress-bar-wrap{flex:1}
+.progress-label{font-size:.72rem;font-weight:700;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.08em}
+.progress-bar{width:100%;height:8px;background:var(--border);border-radius:999px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--blue-light));border-radius:999px;transition:width .4s cubic-bezier(.4,0,.2,1)}
+.score-box{background:var(--white);border:2px solid var(--border);border-radius:10px;padding:6px 14px;text-align:center;flex-shrink:0}
+.score-box-val{font-size:1.2rem;font-weight:900;color:var(--navy);line-height:1;display:block}
+.score-box-lbl{font-size:.62rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.q-body{padding:28px 24px 20px}
+.q-meta{display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.q-num-badge{background:var(--blue);color:#fff;font-size:.7rem;font-weight:800;padding:3px 10px;border-radius:20px;letter-spacing:.08em;text-transform:uppercase}
+.q-chapter-badge{background:var(--amber-light);border:1px solid #f5c97a;color:var(--amber);font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:20px}
+.q-text{font-family:'Merriweather',serif;font-size:1.15rem;font-weight:700;color:var(--navy);line-height:1.5;margin-bottom:22px;padding:20px;background:var(--sky);border:2px solid var(--border2);border-radius:12px;border-left:4px solid var(--blue)}
+.options{display:flex;flex-direction:column;gap:10px}
+.opt{background:var(--white);border:2px solid var(--border);border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:background .15s,border-color .15s,transform .12s;text-align:left;width:100%;color:var(--text);font-family:'Nunito',sans-serif;font-size:.9rem;font-weight:600}
+.opt:not(:disabled):hover{background:var(--sky);border-color:var(--blue-light);transform:translateX(3px)}
+.opt:disabled{cursor:default;transform:none!important}
+.opt-key{width:32px;height:32px;border-radius:8px;background:var(--sky);border:2px solid var(--border);display:grid;place-items:center;font-size:.78rem;font-weight:900;color:var(--blue);flex-shrink:0;font-family:'Nunito',sans-serif;transition:all .12s}
+.opt-text{flex:1;line-height:1.45}
+.opt.correct{background:var(--green-light);border-color:var(--green)}
+.opt.correct .opt-key{background:var(--green);border-color:var(--green);color:#fff}
+.opt.wrong{background:var(--red-light);border-color:var(--red)}
+.opt.wrong .opt-key{background:var(--red);border-color:var(--red);color:#fff}
+.answer-reveal{display:none;margin-top:16px;padding:14px 16px;background:var(--green-light);border:2px solid var(--green);border-radius:12px;gap:12px;align-items:flex-start}
+.answer-reveal.show{display:flex}
+.ar-icon{width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-size:.9rem;font-weight:900;display:grid;place-items:center;flex-shrink:0}
+.ar-label{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:var(--green);margin-bottom:3px}
+.ar-text{font-size:.9rem;font-weight:700;color:var(--navy)}
+.quiz-footer{padding:16px 24px;border-top:2px solid var(--border2);background:var(--sky);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.btn{padding:10px 20px;border-radius:10px;border:2px solid transparent;cursor:pointer;font-family:'Nunito',sans-serif;font-size:.85rem;font-weight:800;display:inline-flex;align-items:center;gap:7px;transition:all .15s;letter-spacing:.01em}
+.btn.ghost{border-color:var(--border);background:var(--white);color:var(--muted)}
+.btn.ghost:hover{border-color:var(--muted);color:var(--navy)}
+.btn.primary{border-color:var(--blue);background:var(--blue);color:#fff;box-shadow:0 4px 12px rgba(33,118,174,.3)}
+.btn.primary:hover{background:var(--navy);border-color:var(--navy)}
+.btn.primary:disabled{opacity:.4;cursor:not-allowed;box-shadow:none}
+.btn.hint{border-color:var(--amber);background:var(--amber-light);color:var(--amber)}
+.btn.hint:hover{background:var(--amber);color:#fff}
+.result-wrap{max-width:560px;margin:0 auto}
+.result-card{background:var(--white);border:2px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-lg)}
+.result-banner{background:var(--navy);padding:32px 24px;text-align:center;position:relative;overflow:hidden}
+.result-banner::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:24px 24px}
+.result-emoji{font-size:3.5rem;display:block;margin-bottom:8px}
+.result-title{font-size:1.4rem;font-weight:900;color:#fff;margin-bottom:6px}
+.result-sub{color:rgba(255,255,255,.55);font-size:.88rem}
+.result-score-area{padding:28px 24px;text-align:center;border-bottom:2px solid var(--border2)}
+.score-circle{width:120px;height:120px;border-radius:50%;background:var(--sky);border:4px solid var(--blue);display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 12px;box-shadow:0 0 0 8px var(--sky2)}
+.score-big{font-size:2.4rem;font-weight:900;color:var(--navy);line-height:1}
+.score-total{font-size:.75rem;font-weight:700;color:var(--muted)}
+.score-pct{font-size:1rem;font-weight:800;color:var(--blue);margin-bottom:4px}
+.score-msg{font-family:'Merriweather',serif;font-size:.9rem;font-style:italic;color:var(--muted)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);padding:20px 24px;gap:12px;border-bottom:2px solid var(--border2)}
+.stat-item{background:var(--sky);border:2px solid var(--border2);border-radius:12px;padding:14px 10px;text-align:center}
+.stat-icon{font-size:1.3rem;display:block;margin-bottom:6px}
+.stat-val{font-size:1.6rem;font-weight:900;display:block;line-height:1;color:var(--navy)}
+.stat-val.g{color:var(--green)}
+.stat-val.r{color:var(--red)}
+.stat-lbl{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-top:4px;display:block}
+.result-actions{padding:20px 24px}
+.hidden{display:none!important}
+.fade-in{animation:fadeUp .3s ease forwards}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:640px){
+  main{padding:20px 12px 60px}
+  .hdr{padding:0 14px}
+  .bc{padding:7px 14px}
+  .page-hero{padding:20px;border-radius:12px}
+  .page-hero h1{font-size:1.2rem}
+  .page-hero::before,.page-hero::after{display:none}
+  .q-body{padding:20px 16px 16px}
+  .quiz-hdr{padding:13px 16px}
+  .quiz-footer{padding:12px 16px}
+  .progress-area{padding:10px 16px}
+  .q-text{font-size:1rem;padding:14px}
+  .result-actions{padding:16px}
+  .result-score-area{padding:20px 16px}
+  .result-stats{padding:16px;gap:8px}
+  .score-circle{width:100px;height:100px}
+  .score-big{font-size:2rem}
 }
 </style>
 </head>
 <body>
-
-<!-- HEADER -->
 <header>
   <div class="hdr">
     <div class="brand" id="brandHome">
-      <div class="brand-mark">SY</div>
-      <span class="brand-text">Shubha Yatra <em>Academy</em></span>
+      <div class="brand-mark">🎓</div>
+      <div>
+        <div class="brand-name">Shubha Yatra Academy</div>
+        <div class="brand-tagline">PSC · MCQ Practice Portal</div>
+      </div>
     </div>
-    <div class="hdr-right">
-      <div class="chip">⏱ <b id="settingTime">30</b>s per Q</div>
-    </div>
+    <div class="hdr-pill">📚 Lok Sewa Prep</div>
   </div>
 </header>
-
-<!-- BREADCRUMB -->
 <div class="bc-wrap">
   <div class="bc" id="breadcrumb"></div>
 </div>
-
 <main>
-
   <div class="page-hero">
-    <h1 id="pageTitle">Select a Course</h1>
-    <p id="pageDesc">Browse available courses and start a quiz.</p>
+    <div class="hero-icon" id="heroIcon">📖</div>
+    <div>
+      <h1 id="pageTitle">Welcome to Your Learning Hub</h1>
+      <p id="pageDesc">Choose a course below and start practicing with MCQs.</p>
+    </div>
   </div>
 
-  <!-- ══ COURSES ══ -->
+  <!-- COURSES -->
   <section id="course-screen">
-    <div class="section-shell fade-in">
-      <div class="section-label">Available Courses</div>
+    <div class="fade-in">
+      <div class="section-head"><h2>Available Courses</h2><div class="section-line"></div></div>
       <div class="grid">
         <div class="card course-card" data-course="c1">
-          <div class="card-head">
-            <div class="card-icon">💻</div>
-            <div class="card-tag">PSC</div>
-          </div>
+          <div class="card-subject">📋 PSC</div>
+          <div class="card-icon-wrap">💻</div>
           <h3>Computer Operator</h3>
           <p>Technical position (4th/5th level) recruited through Nepal's Public Service Commission (Lok Sewa Aayog). Covers fundamentals, OS, networking, and MS Office.</p>
-          <div class="card-footer">
-            <span>View Chapters</span>
-            <div class="arrow-btn">→</div>
-          </div>
+          <div class="card-footer"><div class="card-cta">View Chapters →</div><span class="card-num">1 Chapter</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ CHAPTERS ══ -->
+  <!-- CHAPTERS -->
   <section id="chapter-screen" class="hidden">
-    <div class="section-shell fade-in">
-      <div class="section-label" id="chapterSectionLabel">Chapters</div>
+    <div class="fade-in">
+      <div class="section-head"><h2 id="chapterSectionLabel">Chapters</h2><div class="section-line"></div></div>
       <div class="grid" id="chapterGrid"></div>
     </div>
-
-    <!-- Data: chapters per course -->
     <div class="hidden" id="chapters-c1">
       <div class="card chapter-card" data-chapter="ch1" data-course="c1">
-        <div class="card-head">
-          <div class="card-icon">🖥️</div>
-          <div class="card-tag">Chapter 1</div>
-        </div>
+        <div class="card-subject">📘 Chapter 1</div>
+        <div class="card-icon-wrap">🖥️</div>
         <h3>Computer Fundamentals</h3>
         <p>History, generations, characteristics, types of computers, data vs. information, and the IPO cycle.</p>
-        <div class="card-footer">
-          <span>Start Quiz</span>
-          <div class="arrow-btn">→</div>
-        </div>
+        <div class="card-footer"><div class="card-cta">Start Quiz →</div><span class="card-num">50 Questions</span></div>
       </div>
-      <!-- Add more chapters below as needed -->
     </div>
   </section>
 
-  <!-- ══ QUIZ ══ -->
+  <!-- QUIZ -->
   <section id="quiz-screen" class="hidden">
     <div class="quiz-wrap">
       <div class="quiz-shell fade-in">
-        <!-- Header -->
         <div class="quiz-hdr">
-          <div class="quiz-title" id="quizTitle">Quiz</div>
-          <div class="timer-chip" id="timerChip">⏱ <span id="timerText">30</span>s</div>
+          <div class="quiz-title"><span class="quiz-title-icon">✏️</span><span id="quizTitle">Quiz</span></div>
+          <div class="q-counter">Q <span id="qCurrent">1</span> / <span id="qTotal">0</span></div>
         </div>
-        <!-- Timer bar -->
-        <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
-        <!-- Progress -->
-        <div class="progress-row">
-          <div class="progress-info">
-            <span>Question <b id="qCurrent">1</b> of <b id="qTotal">0</b></span>
-            <span class="score-badge">✦ <span id="scoreLive">0</span> pts</span>
+        <div class="progress-area">
+          <div class="progress-bar-wrap">
+            <div class="progress-label">Progress</div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
           </div>
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width:0%"></div>
+          <div class="score-box">
+            <span class="score-box-val" id="scoreLive">0</span>
+            <span class="score-box-lbl">Score</span>
           </div>
         </div>
-        <!-- Question -->
         <div class="q-body">
-          <div class="q-num" id="qNum">Question 1</div>
+          <div class="q-meta">
+            <span class="q-num-badge" id="qNum">Question 1</span>
+            <span class="q-chapter-badge" id="qChapterBadge">📘 Chapter</span>
+          </div>
           <div class="q-text" id="qText">Loading…</div>
           <div class="options" id="optWrap"></div>
+          <div class="answer-reveal" id="answerReveal">
+            <div class="ar-icon">✓</div>
+            <div>
+              <div class="ar-label">✅ Correct Answer</div>
+              <div class="ar-text" id="answerRevealText">—</div>
+            </div>
+          </div>
         </div>
-        <!-- Footer -->
         <div class="quiz-footer">
           <button class="btn ghost" id="backBtn">← Exit Quiz</button>
-          <button class="btn primary" id="nextBtn" disabled>Next →</button>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <button class="btn hint hidden" id="showAnswerBtn">💡 Show Answer</button>
+            <button class="btn primary" id="nextBtn" disabled>Next Question →</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ RESULT ══ -->
+  <!-- RESULT -->
   <section id="result-screen" class="hidden">
-    <div class="fade-in">
+    <div class="result-wrap fade-in">
       <div class="result-card">
-        <div class="result-emoji" id="resultEmoji">🎉</div>
-        <div class="result-title">Quiz Complete!</div>
-        <div class="result-score"><span id="scoreVal">0</span> / <span id="totalVal">0</span></div>
-        <div class="result-sub" id="resultPct">—%</div>
-        <div class="result-msg" id="feedbackMsg">Well done!</div>
-        <div class="result-stats">
-          <div class="stat-chip g">✓ Correct <b id="resCorrect">0</b></div>
-          <div class="stat-chip r">✗ Wrong <b id="resWrong">0</b></div>
-          <div class="stat-chip">⏭ Skipped <b id="resSkipped">0</b></div>
+        <div class="result-banner">
+          <span class="result-emoji" id="resultEmoji">🎉</span>
+          <div class="result-title">Quiz Complete!</div>
+          <div class="result-sub" id="quizResultName">Computer Fundamentals</div>
         </div>
-        <button class="btn primary" id="homeBtn" style="width:100%;justify-content:center;">↩ Back to Home</button>
+        <div class="result-score-area">
+          <div class="score-circle">
+            <span class="score-big" id="scoreVal">0</span>
+            <span class="score-total">out of <span id="totalVal">0</span></span>
+          </div>
+          <div class="score-pct" id="resultPct">—%</div>
+          <div class="score-msg" id="feedbackMsg">Keep it up!</div>
+        </div>
+        <div class="result-stats">
+          <div class="stat-item"><span class="stat-icon">✅</span><span class="stat-val g" id="resCorrect">0</span><span class="stat-lbl">Correct</span></div>
+          <div class="stat-item"><span class="stat-icon">❌</span><span class="stat-val r" id="resWrong">0</span><span class="stat-lbl">Wrong</span></div>
+          <div class="stat-item"><span class="stat-icon">💡</span><span class="stat-val" id="resSkipped">0</span><span class="stat-lbl">Hints Used</span></div>
+        </div>
+        <div class="result-actions">
+          <button class="btn primary" id="homeBtn" style="width:100%;justify-content:center;padding:13px 20px;font-size:.9rem;">🏠 Back to Home</button>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ QUESTION BANK ══ -->
-  <!-- course > chapter = direct quiz, no topics needed
-       data-chapter="ch1" maps directly to questions below
-       data-answer: 0=A, 1=B, 2=C, 3=D -->
+  <!-- QUESTION BANK -->
   <div id="questionBank" class="hidden">
-
     <div class="chapter-questions" data-chapter="ch1">
-
-      <div class="q" data-q="Which component is considered the 'brain' of the computer, responsible for executing instructions?"
-           data-options="Hard Drive|CPU (Central Processing Unit)|RAM (Random Access Memory)|Power Supply Unit" data-answer="1"></div>
-
-      <div class="q" data-q="What was the primary electronic component used in First Generation computers (1940–1956)?"
-           data-options="Transistors|Vacuum Tubes|Integrated Circuits|Microprocessors" data-answer="1"></div>
-
-      <div class="q" data-q="Who invented the 'Tabulating Machine' which used punched cards to process the US Census?"
-           data-options="Charles Babbage|Herman Hollerith|Blaise Pascal|Alan Turing" data-answer="1"></div>
-
-      <div class="q" data-q="Which characteristic of a computer ensures that if the input is correct, the result will always be correct?"
-           data-options="Speed|Accuracy|Versatility|Diligence" data-answer="1"></div>
-
-      <div class="q" data-q="What technology replaced vacuum tubes in the Second Generation of computers?"
-           data-options="Transistors|Microprocessors|Gears and Levers|Integrated Circuits" data-answer="0"></div>
-
-      <div class="q" data-q="Which type of computer is used to measure continuous physical quantities like temperature or speed?"
-           data-options="Digital Computer|Analog Computer|Mainframe Computer|Supercomputer" data-answer="1"></div>
-
-      <div class="q" data-q="Who designed the 'Analytical Engine', considered the first general-purpose programmable computer design?"
-           data-options="John von Neumann|Charles Babbage|Ada Lovelace|Blaise Pascal" data-answer="1"></div>
-
-      <div class="q" data-q="Which generation of computers introduced the 'Microprocessor', putting the CPU on a single chip?"
-           data-options="Third Generation|Fourth Generation|Second Generation|First Generation" data-answer="1"></div>
-
-      <div class="q" data-q="A computer used in a hospital ICU that measures heartbeat (analog) and displays it as numbers (digital) is an example of:"
-           data-options="Hybrid Computer|Supercomputer|Mainframe Computer|Tablet Computer" data-answer="0"></div>
-
-      <div class="q" data-q="Which of the following is NOT a characteristic of a computer?"
-           data-options="Automation|Creativity|Storage|Speed" data-answer="1"></div>
-
-      <div class="q" data-q="Which device, dating back to ancient Mesopotamia, is considered the earliest mechanical tool for calculation?"
-           data-options="Slide Rule|Abacus|Pascaline|Napier's Bones" data-answer="1"></div>
-
-      <div class="q" data-q="What does 'IC' stand for in the context of Third Generation computers?"
-           data-options="Internal Calculator|Integrated Circuit|Intelligent Chip|Information Center" data-answer="1"></div>
-
-      <div class="q" data-q="Which type of computer is designed for large organizations to handle high volumes of data processing?"
-           data-options="Microcomputer|Mainframe Computer|Workstation|Embedded System" data-answer="1"></div>
-
-      <div class="q" data-q="Which era of computing was defined by the use of simple gears, wheels, and physical motion before electricity?"
-           data-options="The Mechanical Era|The Transistor Era|The Quantum Era|The Digital Era" data-answer="0"></div>
-
-      <div class="q" data-q="In the acronym IPOS, what does the 'S' stand for?"
-           data-options="System|Storage|Scan|Speed" data-answer="1"></div>
-
-      <div class="q" data-q="The 'Pascaline', invented in 1642, was capable of performing which operations?"
-           data-options="Multiplication and Division|Addition and Subtraction|Square Roots|Calculus" data-answer="1"></div>
-
-      <div class="q" data-q="Which of the following is an example of a 'Microcomputer'?"
-           data-options="The Summit Supercomputer|A Laptop|An IBM Mainframe|The ENIAC" data-answer="1"></div>
-
-      <div class="q" data-q="Fifth Generation computers (Present–Future) are primarily focused on developing which technology?"
-           data-options="Vacuum Tubes|Artificial Intelligence (AI)|Punch Cards|Mechanical Gears" data-answer="1"></div>
-
-      <div class="q" data-q="What is the meaning of 'Versatility' in computers?"
-           data-options="Ability to store data forever|Ability to perform different types of tasks|Ability to repair itself|Ability to process data at high speed" data-answer="1"></div>
-
-      <div class="q" data-q="Which computer was the first to be commercially available for business use?"
-           data-options="ENIAC|UNIVAC|Colossus|Difference Engine" data-answer="1"></div>
-
-      <div class="q" data-q="What are the three core components of a computer system?"
-           data-options="CPU, RAM, HDD|Input, Output, Storage|Hardware, Software, Users (Peopleware)|Monitor, Keyboard, Mouse" data-answer="2"></div>
-
-      <div class="q" data-q="Which of the following BEST defines a computer system?"
-           data-options="A machine that only plays games|An integrated set of hardware and software for input, process, store, output|A device used only for communication|A collection of keyboards and monitors" data-answer="1"></div>
-
-      <div class="q" data-q="An ATM machine is an example of:"
-           data-options="A general-purpose microcomputer|A special-purpose computer system for banking|A supercomputer|A hybrid analog-digital device" data-answer="1"></div>
-
-      <div class="q" data-q="Which of the following is the BEST definition of data?"
-           data-options="Processed and meaningful facts|Raw, unorganized facts and figures with no meaning by themselves|Instructions given to a computer|The output shown on a monitor" data-answer="1"></div>
-
-      <div class="q" data-q="A student's exam marks — 40, 60, and 80 — are an example of:"
-           data-options="Information|Data|Output|Processing" data-answer="1"></div>
-
-      <div class="q" data-q="After calculating Total = 180 and Result = PASS from marks 40, 60, 80 — the result 'PASS' is:"
-           data-options="Data|Raw input|Information|Storage" data-answer="2"></div>
-
-      <div class="q" data-q="In the IPO cycle, which stage involves the CPU performing calculations?"
-           data-options="Input|Processing|Output|Storage" data-answer="1"></div>
-
-      <div class="q" data-q="Which of the following devices is used in the INPUT stage?"
-           data-options="Monitor|Printer|Speaker|Scanner" data-answer="3"></div>
-
-      <div class="q" data-q="ROM (Read Only Memory) is best described as:"
-           data-options="Volatile memory lost when power is off|A high-speed temporary CPU register|Non-volatile memory storing permanent system instructions|An output device" data-answer="2"></div>
-
-      <div class="q" data-q="Which of the following is an OUTPUT device?"
-           data-options="Keyboard|Scanner|Microphone|Projector" data-answer="3"></div>
-
-      <div class="q" data-q="What does the ALU (Arithmetic Logic Unit) do?"
-           data-options="Controls data flow between components|Stores data temporarily during processing|Performs arithmetic and logical operations|Displays output to the user" data-answer="2"></div>
-
-      <div class="q" data-q="SSD and HDD are examples of:"
-           data-options="Primary volatile storage|CPU registers|Permanent secondary storage|Output devices" data-answer="2"></div>
-
-      <!-- ✏️ ADD MORE QUESTIONS BELOW
-           <div class="q" data-q="Your question here?"
-                data-options="Option A|Option B|Option C|Option D" data-answer="0"></div>
-      -->
+      <div class="q" data-q="What does the acronym IPOS stand for in computing?" data-options="Input, Processing, Output, Storage|Input, Program, Output, System|Instruction, Process, Output, Speed|Input, Processing, Operation, Save" data-answer="0"></div>
+      <div class="q" data-q="Which component is considered the 'brain' of the computer, responsible for executing instructions?" data-options="Hard Drive|CPU (Central Processing Unit)|RAM (Random Access Memory)|Power Supply Unit" data-answer="1"></div>
+      <div class="q" data-q="What is the definition of a computer?" data-options="A device that only stores data|An electronic device that accepts input, processes data, produces output, and stores information|A mechanical device used for calculations only|A device that only performs arithmetic operations" data-answer="1"></div>
+      <div class="q" data-q="Who is known as the 'Father of the Computer'?" data-options="Herman Hollerith|Alan Turing|Charles Babbage|Blaise Pascal" data-answer="2"></div>
+      <div class="q" data-q="What was the Pascaline?" data-options="The first electronic computer|A mechanical calculator invented by Blaise Pascal using gears and wheels|A punched card machine invented by Herman Hollerith|The first general-purpose computer" data-answer="1"></div>
+      <div class="q" data-q="What was significant about Charles Babbage's Analytical Engine (1837)?" data-options="It was the first computer to use transistors|It was the first electronic computer|It had input, memory, processor, and output — like a modern computer|It was used to crack WWII codes" data-answer="2"></div>
+      <div class="q" data-q="Herman Hollerith's Tabulating Machine used which technology to store data?" data-options="Vacuum Tubes|Magnetic tape|Punched Cards|Transistors" data-answer="2"></div>
+      <div class="q" data-q="Hollerith's company eventually became which major tech corporation?" data-options="Microsoft|Apple|Intel|IBM" data-answer="3"></div>
+      <div class="q" data-q="Which computer was built during WWII specifically to crack German codes?" data-options="ENIAC|UNIVAC|Colossus|Analytical Engine" data-answer="2"></div>
+      <div class="q" data-q="ENIAC, the first general-purpose electronic computer, used which technology?" data-options="Transistors|Integrated Circuits|Vacuum Tubes|Microprocessors" data-answer="2"></div>
+      <div class="q" data-q="UNIVAC became famous for correctly predicting which US event?" data-options="The 1945 end of World War II|The 1952 US Presidential Election|The 1969 Moon Landing|The 1963 Kennedy Assassination" data-answer="1"></div>
+      <div class="q" data-q="Which invention in 1947 replaced vacuum tubes with small, reliable switches?" data-options="The Microprocessor|The Integrated Circuit|The Transistor|The Magnetic Core Memory" data-answer="2"></div>
+      <div class="q" data-q="What was the Intel 4004, released in 1971?" data-options="The first personal computer|The first microprocessor — putting the CPU on a single chip|The first integrated circuit|The first operating system" data-answer="1"></div>
+      <div class="q" data-q="What key hardware characterizes 1st Generation computers (1940–1956)?" data-options="Transistors|Integrated Circuits|Vacuum Tubes|Microprocessors" data-answer="2"></div>
+      <div class="q" data-q="Which language did 1st Generation computers use?" data-options="Assembly language|High-level language|Machine language (0s and 1s)|Python" data-answer="2"></div>
+      <div class="q" data-q="What hardware defines 2nd Generation computers (1956–1963)?" data-options="Vacuum Tubes|Transistors|Integrated Circuits|ULSI chips" data-answer="1"></div>
+      <div class="q" data-q="Which generation of computers introduced keyboards and monitors?" data-options="1st Generation|2nd Generation|3rd Generation|4th Generation" data-answer="2"></div>
+      <div class="q" data-q="The 4th Generation of computers (1971–Present) is defined by which technology?" data-options="Transistors|Integrated Circuits|Microprocessors (VLSI)|Vacuum Tubes" data-answer="2"></div>
+      <div class="q" data-q="What is the primary characteristic of 5th Generation computers?" data-options="Use of vacuum tubes|Artificial Intelligence, Voice Recognition, and Quantum Computing|Introduction of keyboards and monitors|Use of transistors" data-answer="1"></div>
+      <div class="q" data-q="What does GIGO stand for in computing?" data-options="Gigabytes In, Gigabytes Out|Garbage In, Garbage Out|Graphics In, Graphics Out|Get Input, Give Output" data-answer="1"></div>
+      <div class="q" data-q="Which characteristic of computers means they do not get tired or lose concentration?" data-options="Speed|Accuracy|Diligence|Versatility" data-answer="2"></div>
+      <div class="q" data-q="A computer performing millions of calculations in the time it takes to blink demonstrates which characteristic?" data-options="Diligence|Storage|Speed|Automation" data-answer="2"></div>
+      <div class="q" data-q="Which type of computer is used for weather forecasting, nuclear simulations, and space research?" data-options="Mainframe Computer|Microcomputer|Supercomputer|Minicomputer" data-answer="2"></div>
+      <div class="q" data-q="Mainframe computers are best described as which analogy?" data-options="Formula 1 cars|Heavy Duty Trucks|Personal Cars|Motorcycles" data-answer="1"></div>
+      <div class="q" data-q="A speedometer or thermometer is an example of which type of computer?" data-options="Digital Computer|Hybrid Computer|Analog Computer|Microcomputer" data-answer="2"></div>
+      <div class="q" data-q="ICU machines in hospitals that measure heartbeat (analog) and show numbers on screen (digital) are examples of which type?" data-options="Analog Computers|Digital Computers|Hybrid Computers|Supercomputers" data-answer="2"></div>
+      <div class="q" data-q="What is the role of the Control Unit (CU) in the CPU?" data-options="Performs arithmetic calculations|Stores data permanently|Coordinates data flow and sequences instruction execution|Displays output to the monitor" data-answer="2"></div>
+      <div class="q" data-q="What does the ALU (Arithmetic Logic Unit) perform?" data-options="Stores programs permanently|Controls all CPU activities and sequences instructions|Performs arithmetic calculations and logical operations|Manages input and output devices" data-answer="2"></div>
+      <div class="q" data-q="What are CPU Registers?" data-options="External hard drives|Ultra-fast, tiny memory locations inside the CPU that hold data during processing|Long-term storage devices|Programs that manage hardware" data-answer="1"></div>
+      <div class="q" data-q="Which of the following is an example of a logical operation performed by the ALU?" data-options="Addition (A + B)|Subtraction (A – B)|AND, OR, NOT operations|Division (A ÷ B)" data-answer="2"></div>
+      <div class="q" data-q="What is RAM (Random Access Memory)?" data-options="Permanent storage that retains data when power is off|Volatile memory that stores data temporarily and is lost when power is off|Read-only memory used to store BIOS|A type of secondary storage" data-answer="1"></div>
+      <div class="q" data-q="Which type of memory is ROM (Read Only Memory)?" data-options="Volatile memory lost when power is off|Non-volatile memory that retains data and stores permanent system instructions|Read-write memory used during processing|Secondary storage for large files" data-answer="1"></div>
+      <div class="q" data-q="Which secondary storage device uses magnetic spinning disks and provides large capacity but slower speed?" data-options="SSD (Solid State Drive)|USB Flash Drive|HDD (Hard Disk Drive)|Memory Card" data-answer="2"></div>
+      <div class="q" data-q="Why is SSD preferred over HDD in modern laptops?" data-options="SSD is cheaper|SSD has more moving parts|SSD is much faster and more durable with no moving parts|SSD has larger capacity" data-answer="2"></div>
+      <div class="q" data-q="An important rule about primary and secondary memory states which of the following?" data-options="The CPU works directly with secondary storage|Secondary memory must be loaded into RAM before the CPU can process it|RAM stores data permanently|HDD is faster than RAM" data-answer="1"></div>
+      <div class="q" data-q="What is the definition of Software?" data-options="The physical, tangible components of a computer|A set of instructions, programs, and data that tell the computer what to do|Hardware that you can see and touch|The storage unit of the computer" data-answer="1"></div>
+      <div class="q" data-q="Which type of software manages and controls hardware and provides a platform for application software to run?" data-options="Application Software|Middleware|System Software|Utility Programs" data-answer="2"></div>
+      <div class="q" data-q="Which of the following is an example of System Software?" data-options="Microsoft Word|Google Chrome|FIFA game|Windows 11 Operating System" data-answer="3"></div>
+      <div class="q" data-q="Device Drivers are a type of system software that:" data-options="Allow users to create documents|Allow the OS to communicate with specific hardware devices|Perform calculations for the user|Provide entertainment" data-answer="1"></div>
+      <div class="q" data-q="What is the function of BIOS/UEFI?" data-options="Runs user applications like Word and Chrome|Initializes hardware during startup before the OS loads|Provides antivirus protection|Manages long-term file storage" data-answer="1"></div>
+      <div class="q" data-q="Which of the following is an example of Application Software?" data-options="Windows 11|Linux OS|Microsoft Excel|Device Driver" data-answer="2"></div>
+      <div class="q" data-q="What is Middleware in computing?" data-options="Software that manages hardware resources|Software that connects different applications and systems allowing them to communicate|The main operating system of a computer|A type of antivirus utility" data-answer="1"></div>
+      <div class="q" data-q="What is a Computer System?" data-options="Only the hardware components of a computer|Only the software installed on a machine|An integrated set of hardware, software, and users working together to input, process, store, and output data|A single processing unit" data-answer="2"></div>
+      <div class="q" data-q="Which three components must work together for a computer system to function?" data-options="CPU, RAM, HDD|Hardware, Software, Users (Peopleware)|Input, Output, Processing|Monitor, Keyboard, Mouse" data-answer="1"></div>
+      <div class="q" data-q="What is DATA in computing?" data-options="Processed information ready for decision-making|Raw, unorganized facts and figures with no meaning by themselves|A type of software instruction|Meaningful output from the CPU" data-answer="1"></div>
+      <div class="q" data-q="What is INFORMATION in computing?" data-options="Raw facts and figures collected but not processed|Data that has been processed, organized, and structured to become meaningful and useful|Unorganized numbers and text|Binary code (0s and 1s)" data-answer="1"></div>
+      <div class="q" data-q="Given raw exam marks of 40, 60, 80 — the result 'Total = 180, Average = 60, Result = PASS' represents:" data-options="Data|Raw Input|Information|Binary Code" data-answer="2"></div>
+      <div class="q" data-q="Which input device converts physical documents or images into digital format?" data-options="Keyboard|Mouse|Scanner|Microphone" data-answer="2"></div>
+      <div class="q" data-q="Which output device produces a physical (hard copy) of documents?" data-options="Monitor|Speaker|Plotter|Printer" data-answer="3"></div>
+      <div class="q" data-q="In the difference between System Software and Application Software, which statement is CORRECT?" data-options="Application software manages hardware; system software runs user tasks|System software manages hardware and works in the background; application software performs user-specific tasks in the foreground|Both types work identically|Application software is required to start the computer; system software is optional" data-answer="1"></div>
     </div>
-
-  </div><!-- /questionBank -->
-
+  </div>
 </main>
-
 <script>
-(() => {
-  const TIME_PER_Q = 30;
-  const $ = (s, p = document) => p.querySelector(s);
-  const $$ = (s, p = document) => [...p.querySelectorAll(s)];
-
-  const screens = {
-    course:  $('#course-screen'),
-    chapter: $('#chapter-screen'),
-    quiz:    $('#quiz-screen'),
-    result:  $('#result-screen'),
-  };
-
-  let state = {
-    courseId: null, courseName: null,
-    chapterId: null, chapterName: null,
-    quiz: [], idx: 0, score: 0,
-    skipped: 0, wrong: 0,
-    locked: false, timer: null, timeLeft: TIME_PER_Q,
-  };
-
-  // ── Utilities ──
-  function hideAll() { Object.values(screens).forEach(s => s.classList.add('hidden')); }
-  function show(key) {
-    hideAll();
-    const el = screens[key];
-    el.classList.remove('hidden');
-    // Scroll to top smoothly on navigation
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    // Only keep sticky footer class when in quiz
-    document.querySelector('.quiz-footer')?.classList.toggle('quiz-active', key === 'quiz');
+(()=>{
+  const $=(s,p=document)=>p.querySelector(s);
+  const $$=(s,p=document)=>[...p.querySelectorAll(s)];
+  const screens={course:$('#course-screen'),chapter:$('#chapter-screen'),quiz:$('#quiz-screen'),result:$('#result-screen')};
+  let state={courseId:null,courseName:null,chapterId:null,chapterName:null,quiz:[],idx:0,score:0,skipped:0,wrong:0,locked:false};
+  function hideAll(){Object.values(screens).forEach(s=>s.classList.add('hidden'))}
+  function show(key){hideAll();screens[key].classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+  function setHead(title,desc,icon='📖'){$('#pageTitle').textContent=title;$('#pageDesc').textContent=desc;$('#heroIcon').textContent=icon}
+  function setBreadcrumb(crumbs){
+    const bc=$('#breadcrumb');
+    if(!crumbs.length){bc.innerHTML='';return}
+    bc.innerHTML=crumbs.map((c,i)=>i===crumbs.length-1?`<span class="bc-current">${c.label}</span>`:`<span class="bc-item" data-nav="${c.nav}">${c.label}</span>`).join('<span class="bc-sep"> › </span>')
   }
-  function setHead(title, desc) {
-    $('#pageTitle').textContent = title;
-    $('#pageDesc').textContent  = desc;
+  function goHome(){
+    Object.assign(state,{courseId:null,courseName:null,chapterId:null,chapterName:null,quiz:[],idx:0,score:0,skipped:0,wrong:0,locked:false});
+    show('course');setHead('Welcome to Your Learning Hub','Choose a course below and start practicing with MCQs.','📖');setBreadcrumb([])
   }
-  function setBreadcrumb(crumbs) {
-    // crumbs: [{label, nav}] last one is current (no link)
-    const bc = $('#breadcrumb');
-    if (!crumbs.length) { bc.innerHTML = ''; return; }
-    bc.innerHTML = crumbs.map((c, i) => {
-      if (i === crumbs.length - 1)
-        return `<span class="bc-current">${c.label}</span>`;
-      return `<span class="bc-item" data-nav="${c.nav}">${c.label}</span>`;
-    }).join('<span class="bc-sep">›</span>');
+  function loadChapters(courseId,courseName){
+    state.courseId=courseId;state.courseName=courseName;state.chapterId=state.chapterName=null;
+    const grid=$('#chapterGrid');grid.innerHTML='';
+    const src=$(`#chapters-${courseId}`);
+    if(src)src.querySelectorAll('.chapter-card').forEach(el=>grid.appendChild(el.cloneNode(true)));
+    $('#chapterSectionLabel').textContent=`Chapters — ${courseName}`;
+    show('chapter');setHead(courseName,'Select a chapter to start your MCQ practice.','📚');
+    setBreadcrumb([{label:'🏠 Home',nav:'home'},{label:courseName,nav:'course'}])
   }
-  function clearTimer() { clearInterval(state.timer); state.timer = null; }
-
-  // ── Navigation ──
-  function goHome() {
-    clearTimer();
-    Object.assign(state, { courseId: null, courseName: null, chapterId: null, chapterName: null, quiz: [], idx: 0, score: 0, skipped: 0, wrong: 0, locked: false });
-    show('course');
-    setHead('Select a Course', 'Browse available courses and start a quiz.');
-    setBreadcrumb([]);
+  function getQuestions(chapterId){
+    const block=$(`.chapter-questions[data-chapter="${chapterId}"]`,$('#questionBank'));
+    if(!block)return[];
+    return $$('.q',block).map(el=>({q:el.getAttribute('data-q')||'',options:(el.getAttribute('data-options')||'').split('|'),answer:parseInt(el.getAttribute('data-answer')||'0',10)})).filter(x=>x.q&&x.options.length>=2)
   }
-
-  function loadChapters(courseId, courseName) {
-    state.courseId = courseId; state.courseName = courseName;
-    state.chapterId = state.chapterName = null;
-
-    const grid = $('#chapterGrid');
-    grid.innerHTML = '';
-    const src = $(`#chapters-${courseId}`);
-    if (src) src.querySelectorAll('.chapter-card').forEach(el => grid.appendChild(el.cloneNode(true)));
-
-    $('#chapterSectionLabel').textContent = `Chapters — ${courseName}`;
-
-    show('chapter');
-    setHead(courseName, 'Select a chapter to start the quiz.');
-    setBreadcrumb([
-      { label: 'Home', nav: 'home' },
-      { label: courseName, nav: 'course' },
-    ]);
+  function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+  function startQuiz(chapterId,chapterName){
+    state.chapterId=chapterId;state.chapterName=chapterName;
+    let qs=getQuestions(chapterId);
+    if(!qs.length)qs=[{q:'Sample: 1 Byte equals?',options:['4 bits','8 bits','16 bits','32 bits'],answer:1}];
+    state.quiz=shuffle(qs);state.idx=0;state.score=0;state.skipped=0;state.wrong=0;state.locked=false;
+    $('#quizTitle').textContent=chapterName;$('#qTotal').textContent=state.quiz.length;$('#scoreLive').textContent=0;
+    show('quiz');setHead('Quiz in Progress',chapterName,'✏️');
+    setBreadcrumb([{label:'🏠 Home',nav:'home'},{label:state.courseName,nav:'course'},{label:chapterName,nav:'quiz'}]);
+    loadQuestion()
   }
-
-  function getQuestions(chapterId) {
-    const block = $(`.chapter-questions[data-chapter="${chapterId}"]`, $('#questionBank'));
-    if (!block) return [];
-    return $$('.q', block).map(el => ({
-      q: el.getAttribute('data-q') || '',
-      options: (el.getAttribute('data-options') || '').split('|'),
-      answer: parseInt(el.getAttribute('data-answer') || '0', 10),
-    })).filter(x => x.q && x.options.length >= 2);
-  }
-
-  function shuffle(arr) {
-    const a = [...arr];
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-    return a;
-  }
-
-  function startQuiz(chapterId, chapterName) {
-    state.chapterId = chapterId; state.chapterName = chapterName;
-    let qs = getQuestions(chapterId);
-    if (!qs.length) qs = [
-      { q: 'Sample: 1 Byte equals?', options: ['4 bits', '8 bits', '16 bits', '32 bits'], answer: 1 },
-    ];
-    state.quiz = shuffle(qs);
-    state.idx = 0; state.score = 0; state.skipped = 0; state.wrong = 0; state.locked = false;
-
-    $('#quizTitle').textContent = chapterName;
-    $('#qTotal').textContent = state.quiz.length;
-    updateScoreDisplay();
-
-    show('quiz');
-    setHead('Quiz in Progress', `${chapterName} — Answer before time runs out!`);
-    setBreadcrumb([
-      { label: 'Home', nav: 'home' },
-      { label: state.courseName, nav: 'course' },
-      { label: chapterName, nav: 'quiz' },
-    ]);
-    loadQuestion();
-  }
-
-  // ── Quiz Logic ──
-  function updateScoreDisplay() {
-    $('#scoreLive').textContent = state.score;
-  }
-
-  function loadQuestion() {
-    clearTimer();
-    state.locked = false;
-    $('#nextBtn').disabled = true;
-
-    if (state.idx >= state.quiz.length) return showResults();
-
-    const item = state.quiz[state.idx];
-    const pct = (state.idx / state.quiz.length) * 100;
-    $('#progressFill').style.width = pct + '%';
-    $('#qCurrent').textContent = state.idx + 1;
-    $('#qNum').textContent = `Question ${state.idx + 1}`;
-    $('#qText').innerHTML = item.q;
-
-    const optWrap = $('#optWrap');
-    optWrap.innerHTML = '';
-    ['A', 'B', 'C', 'D'].slice(0, item.options.length).forEach((lbl, i) => {
-      const btn = document.createElement('button');
-      btn.className = 'opt';
-      btn.innerHTML = `<span class="opt-key">${lbl}</span><span>${item.options[i]}</span>`;
-      btn.addEventListener('click', () => pick(i, btn));
-      optWrap.appendChild(btn);
+  function loadQuestion(){
+    state.locked=false;$('#nextBtn').disabled=true;$('#showAnswerBtn').classList.add('hidden');$('#answerReveal').classList.remove('show');
+    if(state.idx>=state.quiz.length)return showResults();
+    const item=state.quiz[state.idx];
+    const pct=(state.idx/state.quiz.length)*100;
+    $('#progressFill').style.width=pct+'%';
+    $('#qCurrent').textContent=state.idx+1;$('#qNum').textContent=`Question ${state.idx+1}`;
+    $('#qChapterBadge').textContent=`📘 ${state.chapterName}`;$('#qText').textContent=item.q;
+    const optWrap=$('#optWrap');optWrap.innerHTML='';
+    ['A','B','C','D'].slice(0,item.options.length).forEach((lbl,i)=>{
+      const btn=document.createElement('button');btn.className='opt';
+      btn.innerHTML=`<span class="opt-key">${lbl}</span><span class="opt-text">${item.options[i]}</span>`;
+      btn.addEventListener('click',()=>pick(i,btn));optWrap.appendChild(btn)
     });
-
-    startTimer();
+    setTimeout(()=>{if(!state.locked)$('#showAnswerBtn').classList.remove('hidden')},800)
   }
-
-  function pick(selected, btn) {
-    if (state.locked) return;
-    state.locked = true;
-    clearTimer();
-
-    const correct = state.quiz[state.idx].answer;
-    const buttons = $$('.opt', $('#optWrap'));
-
-    if (selected === correct) {
-      state.score++;
-      updateScoreDisplay();
-      btn.classList.add('correct');
-    } else {
-      btn.classList.add('wrong');
-      state.wrong++;
-      if (buttons[correct]) buttons[correct].classList.add('correct');
-    }
-    buttons.forEach(b => b.disabled = true);
-    $('#nextBtn').disabled = false;
+  function revealAnswer(){
+    if(state.locked)return;
+    const item=state.quiz[state.idx];const buttons=$$('.opt',$('#optWrap'));
+    buttons[item.answer]?.classList.add('correct');
+    $('#answerRevealText').textContent=item.options[item.answer];$('#answerReveal').classList.add('show');
+    $('#showAnswerBtn').classList.add('hidden');state.locked=true;state.skipped++;
+    buttons.forEach(b=>b.disabled=true);$('#nextBtn').disabled=false
   }
-
-  function timeout() {
-    if (state.locked) return;
-    state.locked = true;
-    clearTimer();
-    state.skipped++;
-
-    const correct = state.quiz[state.idx].answer;
-    const buttons = $$('.opt', $('#optWrap'));
-    buttons.forEach(b => b.disabled = true);
-    if (buttons[correct]) buttons[correct].classList.add('correct');
-    $('#nextBtn').disabled = false;
+  function pick(selected,btn){
+    if(state.locked)return;state.locked=true;$('#showAnswerBtn').classList.add('hidden');
+    const item=state.quiz[state.idx];const correct=item.answer;const buttons=$$('.opt',$('#optWrap'));
+    if(selected===correct){state.score++;$('#scoreLive').textContent=state.score;btn.classList.add('correct')}
+    else{btn.classList.add('wrong');state.wrong++;if(buttons[correct])buttons[correct].classList.add('correct')}
+    $('#answerRevealText').textContent=item.options[correct];$('#answerReveal').classList.add('show');
+    buttons.forEach(b=>b.disabled=true);$('#nextBtn').disabled=false
   }
-
-  function startTimer() {
-    state.timeLeft = TIME_PER_Q;
-    $('#timerText').textContent = state.timeLeft;
-    $('#timerFill').className = 'timer-fill';
-    $('#timerFill').style.width = '100%';
-    $('#timerChip').classList.remove('warn');
-    $('#settingTime').textContent = TIME_PER_Q;
-
-    state.timer = setInterval(() => {
-      state.timeLeft--;
-      $('#timerText').textContent = state.timeLeft;
-      const pct = Math.max(0, (state.timeLeft / TIME_PER_Q) * 100);
-      $('#timerFill').style.width = pct + '%';
-      if (state.timeLeft <= 10) {
-        $('#timerFill').className = 'timer-fill low';
-        $('#timerChip').classList.add('warn');
-      }
-      if (state.timeLeft <= 0) timeout();
-    }, 1000);
+  function showResults(){
+    const total=state.quiz.length;const pct=Math.round((state.score/total)*100);
+    $('#scoreVal').textContent=state.score;$('#totalVal').textContent=total;$('#resultPct').textContent=pct+'%';
+    $('#resCorrect').textContent=state.score;$('#resWrong').textContent=state.wrong;$('#resSkipped').textContent=state.skipped;
+    $('#quizResultName').textContent=state.chapterName;
+    const [emoji,msg]=pct>=90?['🏆','"Outstanding performance — keep it up!"']:pct>=75?['🌟','"Great work! A little more practice and you\'ll ace it."']:pct>=55?['👍','"Good effort! Review the incorrect answers to improve."']:pct>=35?['📚','"Keep studying — every attempt makes you stronger."']:['💪','"Don\'t give up! Review the chapter and try again."'];
+    $('#resultEmoji').textContent=emoji;$('#feedbackMsg').textContent=msg;
+    show('result');setHead('Quiz Complete!',`You scored ${state.score} out of ${total}.`,'🎓');
+    setBreadcrumb([{label:'🏠 Home',nav:'home'}])
   }
-
-  function showResults() {
-    clearTimer();
-    const total = state.quiz.length;
-    const pct = Math.round((state.score / total) * 100);
-
-    $('#scoreVal').textContent = state.score;
-    $('#totalVal').textContent = total;
-    $('#resultPct').textContent = pct + '%';
-    $('#resCorrect').textContent = state.score;
-    $('#resWrong').textContent   = state.wrong;
-    $('#resSkipped').textContent = state.skipped;
-
-    const [emoji, msg] =
-      pct >= 90 ? ['🏆', 'Outstanding — you nailed it!'] :
-      pct >= 75 ? ['🌟', 'Great work! Almost perfect.']  :
-      pct >= 55 ? ['👍', 'Good effort! Keep practicing.'] :
-      pct >= 35 ? ['📚', 'Needs more practice — you\'ll improve!'] :
-                  ['💪', 'Don\'t give up — review and retry!'];
-    $('#resultEmoji').textContent = emoji;
-    $('#feedbackMsg').textContent = msg;
-
-    show('result');
-    setHead('Quiz Complete', `You scored ${state.score} out of ${total}.`);
-    setBreadcrumb([{ label: 'Home', nav: 'home' }]);
-  }
-
-  // ── Event Delegation ──
-  document.addEventListener('click', e => {
-    const cc = e.target.closest('.course-card');
-    if (cc) {
-      const id   = cc.dataset.course;
-      const name = cc.querySelector('h3')?.textContent?.trim() || 'Course';
-      return loadChapters(id, name);
-    }
-
-    const chc = e.target.closest('.chapter-card');
-    if (chc && !screens.chapter.classList.contains('hidden')) {
-      const id   = chc.dataset.chapter;
-      const name = chc.querySelector('h3')?.textContent?.trim() || 'Chapter';
-      return startQuiz(id, name);
-    }
-
-    const nav = e.target.closest('[data-nav]');
-    if (nav) {
-      const where = nav.dataset.nav;
-      if (where === 'home')   return goHome();
-      if (where === 'course' && state.courseId) return loadChapters(state.courseId, state.courseName);
-    }
+  document.addEventListener('click',e=>{
+    const cc=e.target.closest('.course-card');
+    if(cc)return loadChapters(cc.dataset.course,cc.querySelector('h3')?.textContent?.trim()||'Course');
+    const chc=e.target.closest('.chapter-card');
+    if(chc&&!screens.chapter.classList.contains('hidden'))return startQuiz(chc.dataset.chapter,chc.querySelector('h3')?.textContent?.trim()||'Chapter');
+    const nav=e.target.closest('[data-nav]');
+    if(nav){const where=nav.dataset.nav;if(where==='home')return goHome();if(where==='course'&&state.courseId)return loadChapters(state.courseId,state.courseName)}
   });
-
-  $('#nextBtn').addEventListener('click', () => {
-    if (!state.locked) return;
-    state.idx++;
-    loadQuestion();
-  });
-
-  $('#backBtn').addEventListener('click', () => {
-    clearTimer();
-    loadChapters(state.courseId, state.courseName);
-  });
-
-  $('#homeBtn').addEventListener('click', goHome);
-  $('#brandHome').addEventListener('click', goHome);
-
-  // Boot
-  goHome();
+  $('#nextBtn').addEventListener('click',()=>{if(state.locked){state.idx++;loadQuestion()}});
+  $('#backBtn').addEventListener('click',()=>loadChapters(state.courseId,state.courseName));
+  $('#showAnswerBtn').addEventListener('click',revealAnswer);
+  $('#homeBtn').addEventListener('click',goHome);
+  $('#brandHome').addEventListener('click',goHome);
+  goHome()
 })();
 </script>
 </body>
