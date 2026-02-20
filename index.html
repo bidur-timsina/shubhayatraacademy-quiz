@@ -832,30 +832,29 @@
           ]);
           loadQuestion();
         }
-        function loadQuestion() {
-          state.locked = false;
-          $("#nextBtn").disabled = true;
-          $("#showAnswerBtn").classList.add("hidden");
-          $("#answerReveal").classList.remove("show");
-          if (state.idx >= state.quiz.length) return showResults();
-          const item = state.quiz[state.idx];
-          const pct = (state.idx / state.quiz.length) * 100;
-          $("#progressFill").style.width = pct + "%";
-          $("#qCurrent").textContent = state.idx + 1;
-          $("#qNum").textContent = `Question ${state.idx + 1}`;
-          $("#qChapterBadge").textContent = `📘 ${state.chapterName}`;
-          $("#qText").textContent = item.q;
-          const optWrap = $("#optWrap");
-          optWrap.innerHTML = "";
-          ["A", "B", "C", "D"].slice(0, item.options.length).forEach((lbl, i) => {
-            const btn = document.createElement("button");
-            btn.className = "opt";
-            btn.innerHTML = `<span class="opt-key">${lbl}</span><span class="opt-text">${item.options[i]}</span>`;
-            btn.addEventListener("click", () => pick(i, btn));
-            optWrap.appendChild(btn);
-          });
-          setTimeout(() => { if (!state.locked) $("#showAnswerBtn").classList.remove("hidden"); }, 800);
-        }
+       function loadQuestion() {
+  state.locked = false;
+  $("#nextBtn").disabled = true;
+  $("#showAnswerBtn").classList.add("hidden");
+  $("#answerReveal").classList.remove("show");
+  if (state.idx >= state.quiz.length) return showResults();
+  const item = state.quiz[state.idx];
+  const pct = (state.idx / state.quiz.length) * 100;
+  $("#progressFill").style.width = pct + "%";
+  $("#qCurrent").textContent = state.idx + 1;
+  $("#qNum").textContent = `Question ${state.idx + 1}`;
+  $("#qChapterBadge").textContent = `📘 ${state.chapterName}`;
+  $("#qText").textContent = item.q;
+  const optWrap = $("#optWrap");
+  optWrap.innerHTML = "";
+  ["A", "B", "C", "D"].slice(0, item.options.length).forEach((lbl, i) => {
+    const btn = document.createElement("button");
+    btn.className = "opt";
+    btn.innerHTML = `<span class="opt-key">${lbl}</span><span class="opt-text">${item.options[i]}</span>`;
+    btn.addEventListener("click", () => pick(i, btn));
+    optWrap.appendChild(btn);
+  });
+}
         function revealAnswer() {
           if (state.locked) return;
           const item = state.quiz[state.idx];
